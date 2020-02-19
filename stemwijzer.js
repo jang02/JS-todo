@@ -93,8 +93,111 @@ function question(index = 0, answers = []) {
 
 }
 
+function includedParties(answers, checkboxanswers, settings = "all") {
+    let container = document.getElementById("container");
+    while (container.firstChild) {
+        container.firstChild.remove();
+    }
+    party = parties;
+    partiesChecked = [];
 
+    ["Alles", "Seculaire", "Grote"].forEach(value =>{
+        createElement("button", {innerText: value, onclick: function () {
+                includedParties(answers, checkboxanswers, value)
+            }}, function(element){
+            container.appendChild(element);
+        });
+    });
 
-function includedParties(answers, checkboxanswers) {
-    
+    if(settings === "Seculaire"){
+        let ul = createElement("ul", {}, function (element){
+            container.appendChild(element);
+        });
+        party.forEach(value =>{
+            if(value.secular === true){
+                let li = createElement("li");
+                let checkbox = createElement("input", {type: "checkbox", checked: true});
+                let label = createElement("label", {innerText: value.name, checked: true});
+
+                partiesChecked.push([checkbox, label]);
+                ul.appendChild(li);
+                li.appendChild(checkbox);
+                li.appendChild(label);
+            }
+        });
+    }
+    else if(settings === "Grote"){
+        let ul = createElement("ul", {}, function (element){
+            container.appendChild(element);
+        });
+        party.forEach(value =>{
+            if(value.size < 15){
+                let li = createElement("li");
+                let checkbox = createElement("input", {type: "checkbox", checked: true});
+                let label = createElement("label", {innerText: value.name});
+
+                partiesChecked.push([checkbox, label]);
+                ul.appendChild(li);
+                li.appendChild(checkbox);
+                li.appendChild(label);
+            }
+        });
+    }
+    else{
+        let ul = createElement("ul", {}, function (element){
+            container.appendChild(element);
+        });
+        party.forEach(value =>{
+            let li = createElement("li");
+            let checkbox = createElement("input", {type: "checkbox", checked: true});
+            let label = createElement("label", {innerText: value.name});
+
+            partiesChecked.push([checkbox, label]);
+            ul.appendChild(li);
+            li.appendChild(checkbox);
+            li.appendChild(label);
+        });
+    }
+
+    createElement("button", {innerText: "Verzenden", onclick: function(){
+        partiesinresult = [];
+        partiesChecked.forEach(value =>{
+           if(value[0].checked === true){
+               partiesinresult.push(value[1].innerText);
+           }
+        });
+            score(answers, checkboxanswers, partiesinresult);
+        }}, function (element){
+        container.appendChild(element);
+    });
 }
+
+function score(answers, checkboxanswers, partiesChecked){
+    console.log("Received answers: {0}".format(answers));
+    console.log("Received important subjects: {0}".format(checkboxanswers));
+    console.log("Received parties: " + partiesChecked);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
