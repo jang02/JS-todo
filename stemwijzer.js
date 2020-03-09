@@ -73,7 +73,7 @@ function question(index = 0, answers = []) {
             });
         }
         createElement("button", {innerText: "Vraag overslaan", onclick: function(){
-                answers[index] = "overgelsagen";
+                answers[index] = "overgeslagen";
                 index++;
                 question(index, answers)
             }}, function (element){
@@ -176,7 +176,54 @@ function score(answers, checkboxanswers, partiesChecked){
     console.log("Received answers: {0}".format(answers));
     console.log("Received important subjects: {0}".format(checkboxanswers));
     console.log("Received parties: " + partiesChecked);
+
+    let container = document.getElementById("container");
+
+    questions = subjects;
+    voteresult = {};
+
+    //todo antwoord controleren of ze hetzelfde zijn als een partij
+    //todo alle belangrijke punten dubbel laten tellen voor alle partijen die dezelfde vote hebben
+    //todo de geselecteerde partijen eruit filteren
+
+    while (container.firstChild) {
+        container.firstChild.remove();
+    }
+
+    for(let i = 0; i < partiesChecked.length; i++){
+        party = partiesChecked[i].toString();
+        voteresult[party] = {"name":party, "matches": 0}
+    }
+
+    for(let j = 0; j < questions.length; j++){
+        value = questions[j];
+        parties = value.parties;
+        for(let i = 0; i < partiesChecked.length; i++){
+            parties.forEach(party =>{
+                if(party.name === partiesChecked[i].toString()){
+                    if(party.position === answers[i].toString()){
+                        voteresult[party.name].matches++;
+                        if(checkboxanswers[j].toString() === "true"){
+                            voteresult[party.name].matches++;
+                        }
+                    }
+                }
+            })
+        }
+    }
+
+    Object.entries(voteresult).forEach(value =>{
+        let div = createElement("div");
+        let name = createElement("h1", {innerText: value[1].name});
+        let matches = createElement("p", {innerText: ((value[1].matches / 60) * 100).round(0) + "%"});
+
+        container.appendChild(div);
+        div.appendChild(name);
+        div.appendChild(matches);
+    });
+
 }
+
 
 
 
