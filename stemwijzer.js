@@ -33,9 +33,27 @@ function question(index = 0, answers = []) {
 
     //checks whether or not all questions are done yet
     if (subjects.length <= index){
+        createElement("div", {id: "backbutton-div"}, function (element) {
+            container.appendChild(element);
+        });
+        createElement("a", {id: "backbutton-a", onclick: function(){
+                question(index-1, answers);
+            }}, function (element){
+            document.getElementById("backbutton-div").appendChild(element);
+        });
+        createElement("img", {src: "img/arrow.png", onmouseover: function(){
+                    this.style.position = 'relative';
+                    this.style.left = '-1vw';
+                }, onmouseout: function(){
+                    this.style.left = '0px';
+                }, alt: 'icon'},
+            function(element){
+                document.getElementById("backbutton-a").appendChild(element)
+            });
         //if this is true itll make all the checkboxes and store them in the previous checkboxes variable
         let ul = createElement("ul", {}, function (element){
             container.appendChild(element);
+            element.id = "push-list-items";
         });
         questions.forEach(value =>{
             let li = createElement("li");
@@ -48,6 +66,9 @@ function question(index = 0, answers = []) {
             li.appendChild(label);
         });
         //finishes off by making the submit button
+        createElement("div", {id: "button-div"}, function (element) {
+            container.appendChild(element);
+        });
         createElement("button", {innerText: "Verzenden", onclick: function(){
                 //this variable stores true or false based on whether or not the checkbox was checked
                 checkboxanswers = [];
@@ -57,7 +78,8 @@ function question(index = 0, answers = []) {
                 //moves on to the function that handles all the parties you want to be in the final result
                 includedParties(answers, checkboxanswers);
             }}, function (element){
-            container.appendChild(element);
+            document.getElementById("button-div").appendChild(element);
+            element.style.backgroundColor = "black";
         });
     }
     else{
@@ -90,23 +112,44 @@ function question(index = 0, answers = []) {
                 }
             }, function (element) {
                 if(data[value] === "pro"){
-                    element.id = "yes";
+                    element.id = "pro";
+                    element.style.backgroundColor = "black";
+                    if(answers[index] === "pro"){
+                        element.style.backgroundColor = "rgb(1,180,220)";
+                        element.style.borderRadius = "7.5px";
+                    }
                 }
                 else if(data[value] === "contra"){
-                    element.id = "no";
+                    element.id = "contra";
+                    element.style.backgroundColor = "black";
+                    if(answers[index] === "contra"){
+                        element.style.backgroundColor = "rgb(1,180,220)";
+                        element.style.borderRadius = "7.5px";
+                    }
                 }
                 else if(data[value] === "none"){
-                    element.id = "none"
+                    element.id = "none";
+                    element.style.backgroundColor = "black";
+                    if(answers[index] === "none"){
+                        element.style.backgroundColor = "rgb(1,180,220)";
+                        element.style.borderRadius = "7.5px";
+                    }
                 }
                 document.getElementById("button-div").appendChild(element);
-            })
+
+            });
         });
+        if(answers[index] != null){
+
+        }
         //here it generates an additional 2 buttons for going back 1 question or skipping the question alltogether.
         //this below checks whether or not you're trying to go below the first question(which obv isnt possible) so it doesnt generate this button for the first question
-        if(index > 0){
+        if(index => 0){
             createElement("a", {id: "backbutton-a", onclick: function(){
-                    index--;
-                    question(index, answers)
+                    if (index > 0){
+                        index--;
+                        question(index, answers)
+                    }
                 }}, function (element){
                 document.getElementById("backbutton-div").appendChild(element);
             });
@@ -127,6 +170,11 @@ function question(index = 0, answers = []) {
                 question(index, answers)
             }}, function (element){
             document.getElementById("button-div").appendChild(element);
+            element.style.backgroundColor = "black";
+            if(answers[index] === "overgeslagen"){
+                element.style.backgroundColor = "rgb(1,180,220)";
+                element.style.borderRadius = "7.5px";
+            }
         });
         //this generates all the parties and their thoughts on the statement
         questionInfo.parties.forEach(value => {
@@ -151,18 +199,40 @@ function includedParties(answers, checkboxanswers, settings = "all") {
     }
     party = parties;
     partiesChecked = [];
+    createElement("div", {id: "backbutton-div"}, function (element) {
+        container.appendChild(element);
+    });
+    createElement("a", {id: "backbutton-a", onclick: function(){
+            question(answers.length, answers);
+        }}, function (element){
+        document.getElementById("backbutton-div").appendChild(element);
+    });
+    createElement("img", {src: "img/arrow.png", onmouseover: function(){
+                this.style.position = 'relative';
+                this.style.left = '-1vw';
+            }, onmouseout: function(){
+                this.style.left = '0px';
+            }, alt: 'icon'},
+        function(element){
+            document.getElementById("backbutton-a").appendChild(element)
+        });
+    createElement("div", {id: "button-div"}, function (element) {
+        container.appendChild(element);
+    });
 //generates 3 buttons whether you want all, seculair, or large parties
     ["Alles", "Seculaire", "Grote"].forEach(value =>{
         createElement("button", {innerText: value, onclick: function () {
                 includedParties(answers, checkboxanswers, value)
             }}, function(element){
-            container.appendChild(element);
+            document.getElementById("button-div").appendChild(element);
+            element.style.backgroundColor = "black";
         });
     });
     //checks if the pressed button was seculaire/large or all, (all is by default so I didnt give that an if statement)
     if(settings === "Seculaire"){
         let ul = createElement("ul", {}, function (element){
             container.appendChild(element);
+            element.id = "push-list-items";
         });
         party.forEach(value =>{
             if(value.secular === true){
@@ -180,6 +250,7 @@ function includedParties(answers, checkboxanswers, settings = "all") {
     else if(settings === "Grote"){
         let ul = createElement("ul", {}, function (element){
             container.appendChild(element);
+            element.id = "push-list-items";
         });
         party.forEach(value =>{
             if(value.size < 15){
@@ -197,6 +268,7 @@ function includedParties(answers, checkboxanswers, settings = "all") {
     else{
         let ul = createElement("ul", {}, function (element){
             container.appendChild(element);
+            element.id = "push-list-items";
         });
         party.forEach(value =>{
             let li = createElement("li");
@@ -210,6 +282,9 @@ function includedParties(answers, checkboxanswers, settings = "all") {
         });
     }
 //creates submit button
+    createElement("div", {id: "sbutton-div"}, function (element) {
+        container.appendChild(element);
+    });
     createElement("button", {innerText: "Verzenden", onclick: function(){
             partiesinresult = [];
             partiesChecked.forEach(value =>{
@@ -219,8 +294,10 @@ function includedParties(answers, checkboxanswers, settings = "all") {
             });
             score(answers, checkboxanswers, partiesinresult);
         }}, function (element){
-        container.appendChild(element);
+        document.getElementById("sbutton-div").appendChild(element);
+        element.style.backgroundColor = "black";
     });
+    console.log(party);
 }
 
 function score(answers, checkboxanswers, partiesChecked){
@@ -260,17 +337,22 @@ function score(answers, checkboxanswers, partiesChecked){
         }
     }
 
+    console.log(voteresult);
+    createElement("div", {id: "result"}, function(element){
+        container.appendChild(element);
+    });
     Object.entries(voteresult).forEach(value =>{
         let div = createElement("div");
         let name = createElement("h1", {innerText: value[1].name});
         let matches = createElement("p", {innerText: ((value[1].matches / 60) * 100).round(0) + "%"});
 
-        container.appendChild(div);
+        document.getElementById("result").appendChild(div);
         div.appendChild(name);
         div.appendChild(matches);
     });
 
 }
+
 
 var active = ['vvd','pvda','pvv','sp','cda','d66','cu','gl','sgp','pvdd','50plus','op','vnl','denk','nw','fvd','dbb','vp','pp','a1','ns','lp','lidk'];
 var inactive = ['gp','jl','snl','pvmes','vdp'];

@@ -1,7 +1,7 @@
 body{
     background-image: url(img/ANP-58995843-2048x1220.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    Background-repeat: no-repeat;
+    Background-attachment: fixed;
     font-family: arial;
 }
 
@@ -134,8 +134,12 @@ button a{
 
 #button-div{
     padding: 3vw;
+    display: inline-block;
 }
 
+#backbutton-div {
+    display: inline-block;
+}
 #backbutton-div img{
     width: 5vw;
     transition: .25s;
@@ -179,20 +183,40 @@ button a{
     font-family: arial;
     font-weight: bolder;
     color: white;
-
-    background-color: black;
     border-radius: 2.5px;
     transition: .25s;
 }
 
 #button-div button:hover{
-    background-color: rgb(1,180,220);
+    background-color: rgb(1,180,220) !important;
+    cursor: pointer;
+    border-radius: 7.5px;
+}
+
+#sbutton-div button{
+    width: 10vw;
+    height: 7vh;
+    margin-right: 2vw;
+
+    font-size: 1vw;
+    font-family: arial;
+    font-weight: bolder;
+    color: white;
+    border-radius: 2.5px;
+    transition: .25s;
+}
+
+#sbutton-div button:hover{
+    background-color: rgb(1,180,220) !important;
     cursor: pointer;
     border-radius: 7.5px;
 }
 
 #skip{
     float: right;
+}
+#result{
+    text-align: center;
 }
 
 /*
@@ -232,28 +256,6 @@ button a{
     transition: .2s;
     margin: auto;
 }
-
-
-
-.active{
-    background-color: yellow;
-}
-
-
-.activeButton{
-    background-color: rgba(1,180,220,1) !important;
-    border-radius: 7.5px !important;
-}
-
-#endscreen{
-    display: none;
-}
-
-
-#endscreen-subjects{
-    background-color: rgb(235,235,235);
-}
-
 
 .tooltip {
     position: relative;
