@@ -1,8 +1,8 @@
 function onload() {
     createElement("button", {onclick: start, innerText: "Start"}, function (element) {
-        document.getElementById("container").appendChild(element);
+        document.getElementById("main-content-button-span").appendChild(element);
     });
-
+    loadParties();
 }
 
 function start() {
@@ -19,6 +19,7 @@ function question(index = 0, answers = []) {
     while (container.firstChild) {
         container.firstChild.remove();
     }
+    updateProgressBar(index);
 
     if (subjects.length <= index){
         let ul = createElement("ul", {}, function (element){
@@ -45,11 +46,16 @@ function question(index = 0, answers = []) {
         });
     }
     else{
-
+        createElement("div", {id: "backbutton-div"}, function (element) {
+            container.appendChild(element);
+        });
         createElement("h1", {innerText: questionInfo.title}, function (element) {
             container.appendChild(element);
         });
         createElement("h2", {innerText: questionInfo.statement}, function (element) {
+            container.appendChild(element);
+        });
+        createElement("div", {id: "button-div"}, function (element) {
             container.appendChild(element);
         });
 
@@ -61,30 +67,48 @@ function question(index = 0, answers = []) {
                     question(index, answers);
                 }
             }, function (element) {
-                container.appendChild(element);
+                if(data[value] === "pro"){
+                    element.id = "yes";
+                }
+                else if(data[value] === "contra"){
+                    element.id = "no";
+                }
+                else if(data[value] === "none"){
+                    element.id = "none"
+                }
+                document.getElementById("button-div").appendChild(element);
             })
         });
         if(index > 0){
-            createElement("button", {innerText: "Vorige stelling", onclick: function(){
+            createElement("a", {id: "backbutton-a", onclick: function(){
                     index--;
                     question(index, answers)
                 }}, function (element){
-                container.appendChild(element);
+                document.getElementById("backbutton-div").appendChild(element);
             });
+            createElement("img", {src: "img/arrow.png", onmouseover: function(){
+                        this.style.position = 'relative';
+                        this.style.left = '-1vw';
+                    }, onmouseout: function(){
+                        this.style.left = '0px';
+                    }, alt: 'icon'},
+                function(element){
+                    document.getElementById("backbutton-a").appendChild(element)
+                })
         }
-        createElement("button", {innerText: "Vraag overslaan", onclick: function(){
+        createElement("button", {id: "skip", innerText: "Vraag overslaan", onclick: function(){
                 answers[index] = "overgeslagen";
                 index++;
                 question(index, answers)
             }}, function (element){
-            container.appendChild(element);
+            document.getElementById("button-div").appendChild(element);
         });
 
         questionInfo.parties.forEach(value => {
-            createElement("p", {innerText: "Naam: " + value.name}, function (element) {
+            createElement("p", {innerText: "Naam: " + value.name, id: "hidden"}, function (element) {
                 container.appendChild(element);
             });
-            createElement("p", {innerText: "Mening: " + value.opinion}, function (element) {
+            createElement("p", {innerText: "Mening: " + value.opinion, id: "hidden"}, function (element) {
                 container.appendChild(element);
             });
         });
@@ -182,9 +206,6 @@ function score(answers, checkboxanswers, partiesChecked){
     questions = subjects;
     voteresult = {};
 
-    //todo antwoord controleren of ze hetzelfde zijn als een partij
-    //todo alle belangrijke punten dubbel laten tellen voor alle partijen die dezelfde vote hebben
-    //todo de geselecteerde partijen eruit filteren
 
     while (container.firstChild) {
         container.firstChild.remove();
@@ -222,6 +243,39 @@ function score(answers, checkboxanswers, partiesChecked){
         div.appendChild(matches);
     });
 
+}
+
+var active = ['vvd','pvda','pvv','sp','cda','d66','cu','gl','sgp','pvdd','50plus','op','vnl','denk','nw','fvd','dbb','vp','pp','a1','ns','lp','lidk'];
+var inactive = ['gp','jl','snl','pvmes','vdp'];
+
+
+function loadParties(){
+    active.forEach(value =>{
+        let div = createElement("div", {classList: "white-logo-circle"});
+        let img = createElement("img", {src: 'img/logos/' + value + '.png'});
+
+        document.getElementById("div-1").appendChild(div);
+        div.appendChild(img);
+    });
+    inactive.forEach(value =>{
+        let div = createElement("div", {classList: "white-logo-circle"});
+        let img = createElement("img", {src: 'img/logos/' + value + '.png'});
+
+        document.getElementById("div-2").appendChild(div);
+        div.appendChild(img);
+    });
+}
+
+function updateProgressBar(count){
+    document.getElementById('progress').style.width = [count]/30*100+'%';
+}
+
+function move(x) {
+    x.style.position = 'relative';
+    x.style.left = '-1vw';
+}
+function moveBack(x) {
+    x.style.left = '0px';
 }
 
 

@@ -1,0 +1,291 @@
+body{
+    background-image: url(img/ANP-58995843-2048x1220.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: arial;
+}
+
+#main-content{
+    width: 65vw;
+    margin: 0 auto;
+    padding: 0;
+    display: grid;
+}
+
+#container,#main-content-parties{
+    margin: 0;
+    padding: 5px;
+    grid-row: 1;
+    background-color: rgba(255,255,255,1);
+}
+
+#main-content-parties p{
+    color: white;
+    font-family: arial;
+    font-size: 20px;
+}
+
+#container{
+    grid-row: 1;
+    padding: 3vw;
+}
+
+#container h2{
+    height: 10vh;
+}
+
+#main-content-parties{
+    grid-row: 2;
+    background-color: rgba(1,180,220,1);
+}
+
+#stemwijzer-logo-text{
+    font-family: 'Arial';
+    font-size: 25px;
+}
+
+#stemwijzer-logo-header{
+    color: rgb(1,180,220);
+    font-weight: bold;
+    margin-top: 2vh;
+    margin-bottom: 5vh;
+}
+
+#main-content-startdiv{
+    display: grid;
+    margin-bottom: 2vh;
+}
+
+#main-content-startdiv-subdiv{
+    grid-row: 1;
+    grid-column: 1/2;
+}
+
+.main-content-span{
+    display: inline-grid;
+    grid-template-columns: auto, auto;
+}
+
+#main-content-span-2{
+    grid-row: 2;
+}
+
+.start-page-icons{
+    grid-row: 1;
+    grid-column: 1/2;
+    width: 4vw;
+}
+
+.main-content-span p{
+    grid-row: 1;
+    grid-column: 2/3;
+    padding-left: 1vw;
+    width: 20vw;
+}
+
+#main-content-button-span{
+    grid-row: 1;
+    grid-column: 2/3;
+}
+
+#main-content-button-span button{
+    background-color: black;
+    border: none;
+    width: 15vw;
+    border-radius: 2.5px;
+    height: 6vh;
+    margin: 1vw;
+    position: relative;
+    top: 25%;
+
+    color: white;
+    font-family: Arial;
+    font-weight: bolder;
+    font-size: 40px;
+
+    transition: .25s;
+}
+
+#main-content-button-span button:hover{
+    background-color: rgb(1,180,220);
+    cursor: pointer;
+    border-radius: 7.5px;
+}
+
+#main-content-bottom{
+    border-top: 2px dotted rgb(151,151,151);
+}
+
+#main-content-bottom a{
+    font-family: arial;
+    font-size: 20px;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+#main-content-bottom a:hover {
+    text-decoration: underline;
+    text-decoration-color: rgb(75,75,75);
+}
+
+button a{
+    text-decoration: none;
+}
+
+#button-div{
+    padding: 3vw;
+}
+
+#backbutton-div img{
+    width: 5vw;
+    transition: .25s;
+}
+
+#backbutton-div img:hover{
+    cursor: pointer;
+}
+
+#main-content-content h1{
+    color: rgb(1,180,220);
+    font-family: arial;
+    font-weight: bolder;
+}
+
+#main-content-content h2{
+    font-family: arial;
+}
+
+#progressbar{
+    width: 65vw;
+    background-color: black;
+    height: 1vh;
+    margin: 15px auto 0px auto;
+
+}
+
+#progressbar #progress{
+    transition: 1s;
+    background-color: rgb(1,180,220);
+    height: 2.5vh;
+    width: 0%;
+}
+
+#button-div button{
+    width: 10vw;
+    height: 7vh;
+    margin-right: 2vw;
+
+    font-size: 1vw;
+    font-family: arial;
+    font-weight: bolder;
+    color: white;
+
+    background-color: black;
+    border-radius: 2.5px;
+    transition: .25s;
+}
+
+#button-div button:hover{
+    background-color: rgb(1,180,220);
+    cursor: pointer;
+    border-radius: 7.5px;
+}
+
+#skip{
+    float: right;
+}
+
+/*
+	*following css gives styling to the logo's of all the parties at the home screen
+*/
+
+.white-logo-circle{
+    background-color: white;
+    border-radius: 100vw;
+    width: 5vw;
+    height: 5vw;
+    display: inline-block;
+    margin: .25vw;
+    position: relative;
+    transition: .2s;
+    display: inline-flex;
+}
+
+.white-logo-circle:hover{
+    width: 7.5vw;
+    height: 7.5vw;
+    margin: -2.5vw -1vw .5vw -1vw;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.white-logo-circle:hover img{
+    width: 6vw;
+    height: 6vw;
+    margin: auto;
+    border-radius: 1.5vw;
+}
+
+.white-logo-circle img{
+    width: 3vw;
+    height: 3vw;
+    transition: .2s;
+    margin: auto;
+}
+
+
+
+.active{
+    background-color: yellow;
+}
+
+
+.activeButton{
+    background-color: rgba(1,180,220,1) !important;
+    border-radius: 7.5px !important;
+}
+
+#endscreen{
+    display: none;
+}
+
+
+#endscreen-subjects{
+    background-color: rgb(235,235,235);
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+#push-list-items{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    text-decoration: none;
+    list-style-type: none;
+}
+#hidden{
+    display: none;
+}
