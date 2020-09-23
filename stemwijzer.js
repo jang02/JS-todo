@@ -90,10 +90,12 @@ function question(index = 0, answers = []) {
         //generates the question title
         createElement("h1", {innerText: questionInfo.title}, function (element) {
             container.appendChild(element);
+            element.style.color = "rgb(1,180,220)";
         });
         //generates the question statement
         createElement("h2", {innerText: questionInfo.statement}, function (element) {
             container.appendChild(element);
+            element.style.fontSize = "24px";
         });
         //generates the div in which the buttons are stored
         createElement("div", {id: "button-div"}, function (element) {
@@ -336,12 +338,18 @@ function score(answers, checkboxanswers, partiesChecked){
             })
         }
     }
-
-    console.log(voteresult);
+    sorted = [];
+    for (let i = 60; i >= 0; i--){
+        Object.entries(voteresult).forEach(value =>{
+            if(value[1].matches === i){
+                sorted.push({"name":value[1].name, "matches": value[1].matches});
+            }
+        });
+    }
     createElement("div", {id: "result"}, function(element){
         container.appendChild(element);
     });
-    Object.entries(voteresult).forEach(value =>{
+    Object.entries(sorted).forEach(value =>{
         let div = createElement("div");
         let name = createElement("h1", {innerText: value[1].name});
         let matches = createElement("p", {innerText: ((value[1].matches / 60) * 100).round(0) + "%"});
