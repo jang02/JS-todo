@@ -2,10 +2,10 @@
 <html>
 <head>
     <title>Stemwijzer Tweede Kamer 2017</title>
-    <link rel="stylesheet" type="text/css" href="css/stemwijzer.css">
-    <script src="scripts/data.js"></script>
-    <script src="scripts/utils.js"></script>
-    <script src="scripts/stemwijzer.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/stemwijzer.css">
+    <script src="../scripts/data.js"></script>
+    <script src="../scripts/utils.js"></script>
+    <script src="../scripts/stemwijzer.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body onload="onload()">
@@ -14,17 +14,17 @@
 <div id='progressbar'><div id='progress'></div></div>
 <div id='main-content'>
     <div id='container'>
-        <img src="img/stemwijzer-logo.png" alt='stemwijzer logo'>
+        <img src="../img/stemwijzer-logo.png" alt='stemwijzer logo'>
         <h2 id='stemwijzer-logo-text'>StemWijzer Tweede Kamer 2017</h2>
         <h1 id='stemwijzer-logo-header'>Test uw politieke voorkeur aan de hand van 30 stellingen</h1>
         <div id='main-content-startdiv'>
             <div id='main-content-startdiv-subdiv'>
 					<span class="main-content-span" id='main-content-span-1'>
-						<img class='start-page-icons' id='start-page-icon-1' src="img/person-circle.png" alt='icon'>
+						<img class='start-page-icons' id='start-page-icon-1' src="../img/person-circle.png" alt='icon'>
 						<p>Bekijk de toegankelijke versie voor mensen met een visuele beperking</p>
 					</span>
                 <span class="main-content-span" id='main-content-span-2'>
-						<img class='start-page-icons' id='start-page-icon-2' src="img/lock.png" alt='icon'>
+						<img class='start-page-icons' id='start-page-icon-2' src="../img/lock.png" alt='icon'>
 						<p>De StemWijzer maakt geen gebruik van cookies. Klik hier voor de volledige privacy statement</p>
 					</span>
             </div>
@@ -52,12 +52,12 @@
     var interval;
     jack.onmouseover = function(){
         interval = setInterval(function(){
-            jack.src="img/person-circle-jack.png";
+            jack.src="../img/person-circle-jack.png";
             setTimeout(function(){
-                jack.src="img/person-circle.png";
+                jack.src="../img/person-circle.png";
             },250);
         },500);
-        jack.src="img/person-circle-jack.png";
+        jack.src="../img/person-circle-jack.png";
     }
     jack.onmouseout = stopInterval;
 
@@ -70,13 +70,13 @@
     var interval;
     lock.onmouseover = function(){
         interval = setInterval(function(){
-            lock.src="img/lock_open.png";
+            lock.src="../img/lock_open.png";
             setTimeout(function(){
-                lock.src="img/lock.png";
+                lock.src="../img/lock.png";
             },250);
         },500);
-        lock.src="img/lock.png";
-    }
+        lock.src="../img/lock.png";
+    };
     lock.onmouseout = stopInterval;
 
     function move(x) {

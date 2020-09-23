@@ -41,7 +41,7 @@ function question(index = 0, answers = []) {
             }}, function (element){
             document.getElementById("backbutton-div").appendChild(element);
         });
-        createElement("img", {src: "img/arrow.png", onmouseover: function(){
+        createElement("img", {src: "../img/arrow.png", onmouseover: function(){
                     this.style.position = 'relative';
                     this.style.left = '-1vw';
                 }, onmouseout: function(){
@@ -155,7 +155,7 @@ function question(index = 0, answers = []) {
                 }}, function (element){
                 document.getElementById("backbutton-div").appendChild(element);
             });
-            createElement("img", {src: "img/arrow.png", onmouseover: function(){
+            createElement("img", {src: "../img/arrow.png", onmouseover: function(){
                         this.style.position = 'relative';
                         this.style.left = '-1vw';
                     }, onmouseout: function(){
@@ -209,7 +209,7 @@ function includedParties(answers, checkboxanswers, settings = "all") {
         }}, function (element){
         document.getElementById("backbutton-div").appendChild(element);
     });
-    createElement("img", {src: "img/arrow.png", onmouseover: function(){
+    createElement("img", {src: "../img/arrow.png", onmouseover: function(){
                 this.style.position = 'relative';
                 this.style.left = '-1vw';
             }, onmouseout: function(){
@@ -369,14 +369,14 @@ var inactive = ['gp','jl','snl','pvmes','vdp'];
 function loadParties(){
     active.forEach(value =>{
         let div = createElement("div", {classList: "white-logo-circle"});
-        let img = createElement("img", {src: 'img/logos/' + value + '.png'});
+        let img = createElement("img", {src: '../img/logos/' + value + '.png'});
 
         document.getElementById("div-1").appendChild(div);
         div.appendChild(img);
     });
     inactive.forEach(value =>{
         let div = createElement("div", {classList: "white-logo-circle"});
-        let img = createElement("img", {src: 'img/logos/' + value + '.png'});
+        let img = createElement("img", {src: '../img/logos/' + value + '.png'});
 
         document.getElementById("div-2").appendChild(div);
         div.appendChild(img);
