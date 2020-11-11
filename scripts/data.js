@@ -3601,12 +3601,13 @@ var subjects = [{
     }
 ];
 
-var parties = [{
-    name: "VVD",
-    secular: true,
-    size: 33,
-    long: "Volkspartij voor Vrijheid en Democratie"
-},
+var parties = [
+    {
+        name: "VVD",
+        secular: true,
+        size: 33,
+        long: "Volkspartij voor Vrijheid en Democratie"
+    },
     {
         name: "CDA",
         secular: false,
@@ -3700,11 +3701,6 @@ var parties = [{
     },
     {
         name: "Artikel 1",
-        secular: true,
-        size: 0
-    },
-    {
-        name: "Libertarische Partij",
         secular: true,
         size: 0
     },

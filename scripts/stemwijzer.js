@@ -59,7 +59,7 @@ function question(index = 0, answers = []) {
             let li = createElement("li");
             let checkbox = createElement("input", {type: "checkbox"});
             let label = createElement("label", {innerText: value.title});
-
+            
             checkboxes.push(checkbox);
             ul.appendChild(li);
             li.appendChild(checkbox);
@@ -255,7 +255,7 @@ function includedParties(answers, checkboxanswers, settings = "all") {
             element.id = "push-list-items";
         });
         party.forEach(value =>{
-            if(value.size < 15){
+            if(value.size > 8){
                 let li = createElement("li");
                 let checkbox = createElement("input", {type: "checkbox", checked: true});
                 let label = createElement("label", {innerText: value.name});
@@ -353,10 +353,28 @@ function score(answers, checkboxanswers, partiesChecked){
         let div = createElement("div");
         let name = createElement("h1", {innerText: value[1].name});
         let matches = createElement("p", {innerText: ((value[1].matches / 60) * 100).round(0) + "%"});
+        let progressbar = createElement("div");
+        let progress = createElement("div");
+
+        progressbar.style.width = "65vw";
+        progressbar.style.backgroundColor = "black";
+        progressbar.style.height = "1vh";
+        progressbar.style.margin = "15px auto 0px auto";
+        progressbar.style.borderRadius = "10px";
+
+        progress.style.transition = "1s";
+        progress.style.backgroundColor = "rgb(1,180,220)";
+        progress.style.height = "1vh";
+        progress.style.borderRadius = "10px";
+
 
         document.getElementById("result").appendChild(div);
         div.appendChild(name);
         div.appendChild(matches);
+        div.appendChild(progressbar);
+        progressbar.appendChild(progress);
+        progress.style.width = "0%";
+        setTimeout(function(){progress.style.width = ((value[1].matches / 60) * 100).round(0) + "%";}, 100);
     });
 
 }
